@@ -11,6 +11,7 @@ def greet():
 greet()
 
 board = [[" ", " ", " "] for i in range(3)]
+count = 0
 
 
 def draw_board():
@@ -24,11 +25,9 @@ def draw_board():
     print()
 
 
-draw_board()
-
 def ask():
     while True:
-        cords = input("Введите координаты клетки: ").split()
+        cords = input("Введите координаты клетки через пробел: ").split()
         if len(cords) != 2:
             print("Введите две координаты")
             continue
@@ -46,4 +45,18 @@ def ask():
         return x, y
 
 
-ask()
+while True:
+    count += 1
+    draw_board()
+    if count % 2 == 1:
+        print("Ходит первый игрок")
+    else:
+        print("Ходит второй игрок")
+    x, y = ask()
+    if count % 2 == 1:
+        board[x][y] = "X"
+    else:
+        board[x][y] = "0"
+    if count == 9:
+        break
+        print("Ничья!")
