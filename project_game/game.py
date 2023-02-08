@@ -44,6 +44,22 @@ def ask():
             continue
         return x, y
 
+def win():
+    win_cords = (((0, 0), (0, 1), (0, 2)), ((1, 0), (1, 1), (1, 2)), ((2, 0), (2, 1), (2, 2)),
+                 ((0, 2), (1, 1), (2, 0)), ((0, 0), (1, 1), (2, 2)), ((0, 0), (1, 0), (2, 0)),
+                 ((0, 1), (1, 1), (2, 1)), ((0, 2), (1, 2), (2, 2)))
+    for cord in win_cords:
+        symbols = []
+        for c in cord:
+            symbols.append(board[c[0]][c[1]])
+        if symbols == ["X", "X", "X"]:
+            print("Выиграл первый игрок!")
+            return True
+        if symbols == ["0", "0", "0"]:
+            print("Выиграл второй игрок!")
+            return True
+    return False
+
 
 while True:
     count += 1
@@ -57,6 +73,9 @@ while True:
         board[x][y] = "X"
     else:
         board[x][y] = "0"
+    if win():
+        break
     if count == 9:
         break
         print("Ничья!")
+
